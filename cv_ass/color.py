@@ -5,9 +5,6 @@ iname = 'coins.jpg'
 image = cv2.imread(iname, 2)
 print(image.shape)
 
-# image = image.reshape((-1,3))
-
-# cv2.imshow('reshape', image)
 
 ############################ boundary extraction ##################################################
 
