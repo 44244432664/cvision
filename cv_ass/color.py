@@ -1,15 +1,36 @@
 import cv2
 import numpy as np
 
-iname = 'hanser.jpg'
-image = cv2.imread(iname)
+iname = 'coins.jpg'
+image = cv2.imread(iname, 2)
 print(image.shape)
 
+# image = image.reshape((-1,3))
+
+# cv2.imshow('reshape', image)
 
 ############################ boundary extraction ##################################################
 
-ret, bw_img = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+# ret, bw_img = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+# kernel = np.ones((5,5), np.uint8)
 
+# bw_img = cv2.bitwise_not(bw_img)
+
+# closing = cv2.morphologyEx(bw_img, cv2.MORPH_CLOSE, kernel)
+
+# kernel2 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3,3))
+
+# e = cv2.erode(closing, kernel2, iterations=2)
+
+# bound = closing - e
+
+# cv2.imshow('input', image)
+# cv2.imshow('bw img', bw_img)
+# cv2.imshow('close', closing)
+# cv2.imshow('bound', bound)
+
+# cv2.waitKey()
+# cv2.destroyAllWindows()
 
 ######################### erosion on chip #####################################
 ## img name == 'circuit.jpg'
