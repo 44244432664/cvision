@@ -31,12 +31,12 @@ print(mat1.dtype)
 res1 = cv2.filter2D(src=grayimg, kernel=mat1, ddepth=-1)
 cv2.imwrite('vert_dect.jpg', res1)
 # cv2.imshow('vert_dect', res1)
-cv2.waitKey()
+# cv2.waitKey()
 
 res2 = cv2.filter2D(src=grayimg, kernel=mat2, ddepth=-1)
 cv2.imwrite('hor_dect.jpg', res2)
 # cv2.imshow('hor_dect', res2)
-cv2.waitKey()
+# cv2.waitKey()
 
 
 res = (res1 + res2)
@@ -44,7 +44,18 @@ res = (res1 + res2)
 # res //= 9
 cv2.imwrite('res.jpg', res)
 # cv2.imshow('mask', res)
+# cv2.waitKey()
+
+gauss = cv2.GaussianBlur(res, (5,5), 0)
+cv2.imshow('Gauss', res)
 cv2.waitKey()
+
+try_img = cv2.filter2D(src=res, kernel=gauss2, ddepth=-1)
+cv2.imshow('Gauss2' ,try_img)
+cv2.waitKey()
+
+cv2.destroyAllWindows()
+
 
 img_erosion = cv2.erode(res, kernel, iterations=1)
 img_dilation = cv2.dilate(res, kernel, iterations=1)
