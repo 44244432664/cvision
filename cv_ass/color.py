@@ -1,9 +1,72 @@
 import cv2
 import numpy as np
 
-iname = 'coins.jpg'
-image = cv2.imread(iname, 2)
+iname = 'hanser.jpg'
+image = cv2.imread(iname)
 print(image.shape)
+
+############### boundary detection ##################################################################
+
+# ret, bw_img = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+# kernel = np.ones((5,5), np.uint8)
+
+# bw_img = cv2.bitwise_not(bw_img)
+
+img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+cv2.imshow('gray', img)
+cv2.waitKey(0)
+
+imb = cv2.GaussianBlur(img, (3,3), 0)
+
+cv2.imshow('Gauss blur', imb)
+cv2.waitKey(0)
+
+inv = cv2.bitwise_not(imb)
+
+# Sobel Edge Detection
+# sobelx = cv2.Sobel(src=inv, ddepth=cv2.CV_64F, dx=1, dy=0, ksize=5) # Sobel Edge Detection on the X axis
+# sobely = cv2.Sobel(src=inv, ddepth=cv2.CV_64F, dx=0, dy=1, ksize=5) # Sobel Edge Detection on the Y axis
+# sobelxy = cv2.Sobel(src=inv, ddepth=cv2.CV_64F, dx=1, dy=1, ksize=5) # Combined X and Y Sobel Edge Detection
+# Display Sobel Edge Detection Images
+# cv2.imshow('Sobel X', sobelx)
+# cv2.waitKey(0)
+# cv2.imshow('Sobel Y', sobely)
+# cv2.waitKey(0)
+# cv2.imshow('Sobel X Y using Sobel() function', sobelxy)
+# cv2.waitKey(0)
+
+# kernel = np.ones((3,3), np.uint8)
+# for i in range(10):
+#     closing = cv2.morphologyEx(sobelxy, cv2.MORPH_CLOSE, kernel)
+# cv2.imshow('closing', closing)
+# cv2.waitKey(0)
+
+# inv = cv2.bitwise_not(closing)
+# cv2.imshow('inv', inv)
+# cv2.waitKey(0)
+ 
+# Canny Edge Detection
+edges = cv2.Canny(image=imb, threshold1=50, threshold2=200) # Canny Edge Detection
+# Display Canny Edge Detection Image
+cv2.imshow('Canny Edge Detection', edges)
+cv2.waitKey(0)
+ 
+cv2.destroyAllWindows()
+
+# hor = np.array([[1, 0, -1], [2, 0, -2], [1, 0, -1]])
+# vert = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
+
+# horz = cv2.filter2D(src=img, kernel=hor, ddepth=-1)
+# vertl = cv2.filter2D(src=img, kernel=vert, ddepth=-1)
+
+# edge = horz + vertl
+
+# cv2.imshow('edge', edge)
+
+# cv2.waitKey()
+# cv2.destroyAllWindows()
+                
 
 
 ############################ boundary extraction ##################################################
